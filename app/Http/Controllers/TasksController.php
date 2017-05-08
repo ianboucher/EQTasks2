@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Task;
+use App\Http\Requests;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use App\Repositories\TaskRepository;
 
 class TasksController extends Controller
@@ -25,17 +28,34 @@ class TasksController extends Controller
      }
 
      /**
-      * Display all tasks belonging to user.
+      * Display a list of all of the user's task.
       *
       * @param  Request  $request
       * @return Response
       */
-      public function index(Request $request)
-      {
-          return view('tasks.index', [
-              'tasks' => $this->tasks->forUser($request->user()),
-          ]);
-      }
+     public function index(Request $request)
+     {
+         $tasks = Task::where('user_id', $request->user()->id)->get();
+
+         return view('tasks.index', [
+             'tasks' => $tasks,
+         ]);
+     }
+
+     // TODO: Get DI/repository pattern working properly     
+
+    //  /**
+    //   * Display all tasks belonging to user.
+    //   *
+    //   * @param  Request  $request
+    //   * @return Response
+    //   */
+    //   public function index(Request $request)
+    //   {
+    //       return view('tasks.index', [
+    //           'tasks' => $this->tasks->forUser($request->user()),
+    //       ]);
+    //   }
 
       /**
        * Create a new task
