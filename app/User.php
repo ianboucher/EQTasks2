@@ -26,4 +26,12 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * Define the relationship between user & task.
+     */
+    public function tasks()
+    {
+        return $this->hasMany('App\Task');
+    }
 }
