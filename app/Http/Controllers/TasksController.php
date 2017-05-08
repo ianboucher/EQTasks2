@@ -42,7 +42,7 @@ class TasksController extends Controller
          ]);
      }
 
-     // TODO: Get DI/repository pattern working properly     
+     // TODO: Get DI/repository pattern working properly
 
     //  /**
     //   * Display all tasks belonging to user.
@@ -87,6 +87,7 @@ class TasksController extends Controller
         {
             $this->authorize('destroy', $task);
             $task->detete();
+            
             return redirect('/tasks');
         }
 }
